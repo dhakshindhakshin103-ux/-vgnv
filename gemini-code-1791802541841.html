@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Grand Marriage Reception Invitation of P. Amarnath & P. Sinduja - Nov 19, 2026 at Sri Gowri Mahal, Pollachi.">
+    <title>P. Amarnath &amp; P. Sinduja | Grand Marriage Reception Invitation</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js 3D Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800;900&family=Great+Vibes&family=Noto+Serif+Tamil:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        burgundy: {
+                            50: '#fdf2f4',
+                            100: '#fbe6e9',
+                            800: '#6b1124',
+                            900: '#4a0a17',
+                            950: '#2a030b',
+                        },
+                        gold: {
+                            100: '#fef3c7',
+                            300: '#fcd34d',
+                            400: '#f59e0b',
+                            500: '#d4af37',
+                            600: '#b8860b',
+                            700: '#8b6508',
+                        },
+                        ivory: {
+                            50: '#fdfbf7',
+                            100: '#faf7f2',
+                            200: '#f5ebe6',
+                            300: '#eadecf',
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        playfair: ['Playfair Display', 'serif'],
+                        script: ['Great Vibes', 'cursive'],
+                        tamil: ['Noto Serif Tamil', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* 3D Envelope & Unfolding Card Styles */
+        .envelope-perspective {
+            perspective: 1500px;
+        }
+
+        .envelope-container {
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease 0.8s;
+        }
+
+        .envelope-flap {
+            transform-origin: top center;
+            transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+
+        .envelope-opened .envelope-flap {
+            transform: rotateX(180deg);
+        }
+
+        .envelope-opened .envelope-seal {
+            transform: scale(0) rotate(180deg);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .envelope-opened {
+            transform: translateY(120vh) scale(0.8);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Standard 3D card styles */
+        .perspective-container {
+            perspective: 1200px;
+        }
+
+        .glass-card-3d {
+            background: rgba(253, 251, 247, 0.94);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(212, 175, 55, 0.45);
+            box-shadow: 0 25px 50px -12px rgba(42, 3, 11, 0.3), 0 0 30px rgba(212, 175, 55, 0.25);
+            transition: transform 0.25s cubic-bezier(0.1, 0.8, 0.3, 1), box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .layer-3d-base { transform: translateZ(15px); }
+        .layer-3d-mid { transform: translateZ(40px); }
+        .layer-3d-front {
+            transform: translateZ(75px);
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.18));
+        }
+        .layer-3d-high {
+            transform: translateZ(105px);
+            filter: drop-shadow(0 15px 25px rgba(107, 17, 36, 0.3));
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-shimmer-sweep {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gold-shimmer-sweep::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                60deg,
+                transparent 30%,
+                rgba(255, 245, 200, 0.45) 50%,
+                transparent 70%
+            );
+            transform: rotate(25deg);
+            animation: sweepLight 4.5s infinite ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes sweepLight {
+            0% { transform: translateX(-100%) rotate(25deg); }
+            35% { transform: translateX(100%) rotate(25deg); }
+            100% { transform: translateX(100%) rotate(25deg); }
+        }
+
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-spin-slow {
+            animation: spinSlow 45s linear infinite;
+        }
+
+        .bg-pattern {
+            background-color: #faf7f2;
+            background-image: radial-gradient(#d4af37 0.9px, transparent 0.9px), radial-gradient(#d4af37 0.9px, #faf7f2 0.9px);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .eq-bar {
+            width: 3px;
+            background-color: #d4af37;
+            border-radius: 2px;
+            animation: eqBounce 1.2s ease-in-out infinite alternate;
+        }
+        .eq-bar:nth-child(1) { height: 12px; animation-delay: 0.1s; }
+        .eq-bar:nth-child(2) { height: 20px; animation-delay: 0.3s; }
+        .eq-bar:nth-child(3) { height: 10px; animation-delay: 0.15s; }
+        .eq-bar:nth-child(4) { height: 17px; animation-delay: 0.4s; }
+
+        .eq-bar.paused {
+            animation-play-state: paused;
+            height: 4px !important;
+        }
+
+        @keyframes eqBounce {
+            0% { transform: scaleY(0.25); }
+            100% { transform: scaleY(1); }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #faf7f2; }
+        ::-webkit-scrollbar-thumb { background: #b8860b; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-ivory-100 text-slate-800 font-sans relative antialiased selection:bg-gold-500 selection:text-white overflow-x-hidden">
+
+    <!-- 3D ROYAL INVITATION ENVELOPE OVERLAY -->
+    <div id="envelopeModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-burgundy-950/95 backdrop-blur-xl p-4 envelope-perspective transition-opacity duration-700">
+        <div id="envelopeCard" class="envelope-container relative w-full max-w-lg h-[460px] sm:h-[520px] bg-gradient-to-b from-burgundy-900 to-burgundy-950 rounded-3xl border-2 border-gold-500/80 shadow-[0_35px_60px_-15px_rgba(0,0,0,0.8),0_0_50px_rgba(212,175,55,0.4)] overflow-hidden flex flex-col justify-between p-6 sm:p-8 cursor-pointer group hover:scale-[1.01] transition-transform" onclick="openInvitationEnvelope()">
+            
+            <!-- Envelope Top Flap -->
+            <div class="envelope-flap absolute top-0 left-0 right-0 h-[200px] sm:h-[230px] bg-gradient-to-b from-burgundy-800 to-burgundy-900 border-b border-gold-500/50 shadow-lg z-20 flex items-center justify-center">
+                <div class="text-center pt-4">
+                    <p class="font-tamil text-gold-300 text-xs sm:text-sm tracking-wide">॥ சுபமஸ்து ॥</p>
+                    <p class="font-cinzel text-[10px] tracking-[0.3em] uppercase text-gold-400 mt-1">Royal Invitation</p>
+                </div>
+            </div>
+
+            <!-- Decorative Corner Filigrees on Envelope -->
+            <div class="absolute top-3 left-3 w-8 h-8 border-t-2 border-l-2 border-gold-400 z-10"></div>
+            <div class="absolute top-3 right-3 w-8 h-8 border-t-2 border-r-2 border-gold-400 z-10"></div>
+            <div class="absolute bottom-3 left-3 w-8 h-8 border-b-2 border-l-2 border-gold-400 z-10"></div>
+            <div class="absolute bottom-3 right-3 w-8 h-8 border-b-2 border-r-2 border-gold-400 z-10"></div>
+
+            <!-- Envelope Body Content -->
+            <div class="relative z-10 text-center mt-32 sm:mt-36">
+                <p class="font-script text-3xl sm:text-4xl text-gold-400 mb-1">Warm Welcome To</p>
+                <h2 class="font-playfair text-2xl sm:text-3xl font-bold text-white tracking-wide">
+                    P. Amarnath <span class="text-gold-400">&amp;</span> P. Sinduja
+                </h2>
+                <p class="font-tamil text-xs text-gold-200 mt-1">திருமண வரவேற்பு நல்விழா அழைப்பிதழ்</p>
+                
+                <div class="my-4 flex items-center justify-center gap-2 text-gold-500">
+                    <span class="h-px w-10 bg-gold-500/50"></span>
+                    <i class="fa-solid fa-gem text-xs animate-pulse"></i>
+                    <span class="h-px w-10 bg-gold-500/50"></span>
+                </div>
+
+                <p class="font-cinzel text-xs text-slate-300 tracking-wider">
+                    Thursday, Nov 19, 2026 • Pollachi
+                </p>
+            </div>
+
+            <!-- Wax Seal / Tap to Open Button -->
+            <div class="relative z-30 flex flex-col items-center justify-center pb-2">
+                <div class="envelope-seal w-20 h-20 rounded-full bg-gradient-to-br from-gold-300 via-gold-500 to-gold-700 text-burgundy-950 flex flex-col items-center justify-center font-cinzel font-black shadow-2xl border-2 border-amber-100 group-hover:scale-110 transition-transform duration-300 animate-bounce">
+                    <i class="fa-solid fa-envelope-open text-xl mb-0.5"></i>
+                    <span class="text-[9px] tracking-widest uppercase">OPEN</span>
+                </div>
+                <p class="font-cinzel text-xs text-gold-300 tracking-widest mt-3 animate-pulse">
+                    Tap to Open Invitation / திறக்க கிளிக் செய்க
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- WebGL Three.js Interactive 3D Canvas Background -->
+    <canvas id="threeCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-80"></canvas>
+
+    <!-- Falling Hearts & Golden Stardust Canvas -->
+    <canvas id="particleCanvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-10 opacity-90"></canvas>
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 glass-card-3d border-b border-gold-500/30 py-3 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-2 group">
+                <span class="font-cinzel text-xl md:text-2xl font-bold tracking-wider text-burgundy-900 group-hover:text-gold-600 transition-colors">
+                    A <span class="text-gold-500">&amp;</span> S
+                </span>
+                <span class="hidden sm:inline font-cinzel text-xs text-gold-700 tracking-widest border-l border-gold-500/30 pl-2">RECEPTION</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium font-cinzel text-burgundy-950">
+                <a href="#home" class="hover:text-gold-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gold-500 hover:after:w-full after:transition-all">
+                    <span class="lang-en">Invitation</span>
+                    <span class="lang-ta hidden text-xs block font-tamil">அழைப்பிதழ்</span>
+                </a>
+                <a href="#schedule" class="hover:text-gold-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gold-500 hover:after:w-full after:transition-all">
+                    <span class="lang-en">Evening Program</span>
+                    <span class="lang-ta hidden text-xs block font-tamil">நிகழ்ச்சி நிரல்</span>
+                </a>
+                <a href="#venue" class="hover:text-gold-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gold-500 hover:after:w-full after:transition-all">
+                    <span class="lang-en">Venue &amp; Map</span>
+                    <span class="lang-ta hidden text-xs block font-tamil">இடம்</span>
+                </a>
+                <a href="#rsvp" class="hover:text-gold-600 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-gold-500 hover:after:w-full after:transition-all">
+                    <span class="lang-en">RSVP</span>
+                    <span class="lang-ta hidden text-xs block font-tamil">பதிலளிக்கவும்</span>
+                </a>
+            </nav>
+
+            <!-- Language Switcher, Re-Open Envelope & Mobile Menu Trigger -->
+            <div class="flex items-center space-x-3">
+                <button type="button" onclick="reopenEnvelope()" title="View Envelope Cover" aria-label="View Envelope Cover" class="bg-gold-500/10 hover:bg-gold-500/20 text-burgundy-900 border border-gold-600/30 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wider font-cinzel transition-all shadow-sm hover:scale-105 flex items-center gap-1.5">
+                    <i class="fa-solid fa-envelope text-gold-600"></i>
+                    <span class="hidden sm:inline">Cover</span>
+                </button>
+
+                <button id="langToggleBtn" type="button" onclick="toggleLanguage()" aria-label="Toggle Language" class="bg-gold-500/10 hover:bg-gold-500/20 text-burgundy-900 border border-gold-600/30 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wider font-cinzel transition-all shadow-sm hover:scale-105">
+                    <span id="langLabel">தமிழ் / EN</span>
+                </button>
+
+                <button type="button" onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu" class="md:hidden text-burgundy-900 text-xl p-1 focus:outline-none">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden mt-3 pt-3 border-t border-gold-500/20 flex flex-col space-y-3 font-cinzel text-center">
+            <a href="#home" onclick="toggleMobileMenu()" class="text-burgundy-900 hover:text-gold-600 py-1">Invitation / அழைப்பிதழ்</a>
+            <a href="#schedule" onclick="toggleMobileMenu()" class="text-burgundy-900 hover:text-gold-600 py-1">Program / நிகழ்ச்சி நிரல்</a>
+            <a href="#venue" onclick="toggleMobileMenu()" class="text-burgundy-900 hover:text-gold-600 py-1">Venue / இடம்</a>
+            <a href="#rsvp" onclick="toggleMobileMenu()" class="text-burgundy-900 hover:text-gold-600 py-1">RSVP / பதிலளிக்கவும்</a>
+        </div>
+    </header>
+
+    <main class="pt-20">
+
+        <!-- HERO SECTION -->
+        <section id="home" class="min-h-screen flex items-center justify-center relative py-12 px-4 overflow-hidden bg-pattern perspective-container">
+            <div class="max-w-7xl mx-auto text-center z-20 relative w-full">
+                
+                <!-- Tamil Traditional Header Ornament -->
+                <div class="mb-6 inline-block scroll-reveal active">
+                    <div class="flex items-center justify-center gap-3 text-gold-600 mb-2">
+                        <span class="h-px w-12 bg-gradient-to-r from-transparent to-gold-500"></span>
+                        <i class="fa-solid fa-gem text-lg animate-pulse"></i>
+                        <span class="h-px w-12 bg-gradient-to-l from-transparent to-gold-500"></span>
+                    </div>
+                    <p class="font-tamil text-burgundy-900 font-semibold text-lg md:text-xl tracking-wide">
+                        ॥ சுப திருமண வரவேற்பு நல்விழா அழைப்பிதழ் ॥
+                    </p>
+                    <p class="font-cinzel text-xs tracking-widest uppercase text-gold-700 mt-1">
+                        Grand Marriage Reception Invitation
+                    </p>
+                </div>
+
+                <!-- 3-COLUMN HERO GRID: GROOM (LEFT) | INVITATION CARD (CENTER) | BRIDE (RIGHT) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center my-4">
+                    
+                    <!-- LEFT COLUMN: GROOM (BOY) -->
+                    <div class="lg:col-span-3 order-2 lg:order-1 flex justify-center scroll-reveal">
+                        <div class="glass-card-3d tilt-card-3d p-3 rounded-3xl border-2 border-gold-500/50 relative gold-shimmer-sweep group w-full max-w-[280px] shadow-2xl">
+                            <div class="w-full h-[400px] sm:h-[440px] lg:h-[500px] rounded-2xl overflow-hidden relative shadow-inner bg-ivory-100 flex items-center justify-center p-1">
+                                <img src="Code_Generated_Image (1).png" alt="P. Amarnath - Groom" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" style="object-position: center 10%;" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-burgundy-950/80 via-transparent to-transparent pointer-events-none"></div>
+                                <div class="absolute bottom-3 left-0 right-0 text-center px-2 z-10">
+                                    <span class="font-playfair text-xl font-bold text-gold-300 block drop-shadow">P. Amarnath</span>
+                                    <span class="font-tamil text-xs text-gold-200 block">மணமகன் (Groom)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CENTER COLUMN: MAIN INVITATION CARD -->
+                    <div class="lg:col-span-6 order-1 lg:order-2">
+                        <div class="glass-card-3d tilt-card-3d p-6 sm:p-10 md:p-12 rounded-3xl border-2 border-gold-500/50 relative gold-shimmer-sweep scroll-reveal">
+                            
+                            <!-- Spinning Background Mandala -->
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10 overflow-hidden layer-3d-base">
+                                <svg class="w-[480px] h-[480px] text-gold-600 animate-spin-slow" viewBox="0 0 200 200" fill="currentColor">
+                                    <path d="M100 0 C110 30 130 30 141 41 C152 52 152 72 182 82 C152 92 152 112 141 123 C130 134 110 134 100 164 C90 134 70 134 59 123 C48 112 48 92 18 82 C48 72 48 52 59 41 C70 30 90 30 100 0 Z"/>
+                                </svg>
+                            </div>
+
+                            <!-- Decorative Corner Filigrees -->
+                            <div class="absolute -top-3 -left-3 w-10 h-10 border-t-2 border-l-2 border-gold-600 layer-3d-front"></div>
+                            <div class="absolute -top-3 -right-3 w-10 h-10 border-t-2 border-r-2 border-gold-600 layer-3d-front"></div>
+                            <div class="absolute -bottom-3 -left-3 w-10 h-10 border-b-2 border-l-2 border-gold-600 layer-3d-front"></div>
+                            <div class="absolute -bottom-3 -right-3 w-10 h-10 border-b-2 border-r-2 border-gold-600 layer-3d-front"></div>
+
+                            <div class="layer-3d-mid">
+                                <span class="font-script text-3xl md:text-4xl text-gold-600 block mb-2">Together with their Families</span>
+                                <h2 class="font-cinzel text-xs md:text-sm tracking-[0.25em] uppercase text-burgundy-800 mb-6">
+                                    <span class="lang-en">Cordially invite you to celebrate the Marriage Reception of</span>
+                                    <span class="lang-ta hidden font-tamil text-sm">எங்கள் வீட்டு சுப திருமண நல்வரவேற்பு விழாவிற்கு தங்களை அன்போடு அழைக்கின்றோம்</span>
+                                </h2>
+                            </div>
+
+                            <!-- Groom & Bride Names Layer with Photos -->
+                            <div class="my-8 relative z-10 layer-3d-high flex flex-col gap-6 items-center">
+                                
+                                <!-- Groom (P. Amarnath) - Photo on LEFT side -->
+                                <div class="flex items-center justify-center gap-3 sm:gap-6 w-full max-w-xl">
+                                    <div class="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-gold-500 shadow-xl shrink-0 ring-4 ring-gold-500/30 bg-ivory-200 hover:scale-105 transition-transform duration-300">
+                                        <img src="Code_Generated_Image (1).png" alt="P. Amarnath (Groom)" class="w-full h-full object-cover" style="object-position: center 10%;" />
+                                    </div>
+                                    <div class="text-left">
+                                        <h1 class="font-playfair text-2xl sm:text-4xl md:text-5xl font-bold text-burgundy-950 tracking-tight drop-shadow-lg">
+                                            P. Amarnath
+                                        </h1>
+                                        <p class="font-tamil text-sm sm:text-base text-gold-700 my-0.5">(பி. அமர்நாத்)</p>
+                                    </div>
+                                </div>
+
+                                <!-- Interlocking Decorative 'and' Divider -->
+                                <div class="my-1 flex items-center justify-center gap-4 w-full">
+                                    <span class="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></span>
+                                    <span class="font-script text-4xl sm:text-5xl text-gold-600 transform -rotate-6 drop-shadow">a n d</span>
+                                    <span class="h-px w-16 sm:w-24 bg-gradient-to-r from-transparent via-gold-500 to-transparent"></span>
+                                </div>
+
+                                <!-- Bride (P. Sinduja) - Photo on RIGHT side -->
+                                <div class="flex items-center justify-center gap-3 sm:gap-6 w-full max-w-xl">
+                                    <div class="text-right">
+                                        <h1 class="font-playfair text-2xl sm:text-4xl md:text-5xl font-bold text-burgundy-950 tracking-tight drop-shadow-lg">
+                                            P. Sinduja
+                                        </h1>
+                                        <p class="font-tamil text-sm sm:text-base text-gold-700 my-0.5">(பி. சிந்துஜா)</p>
+                                    </div>
+                                    <div class="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-2 border-gold-500 shadow-xl shrink-0 ring-4 ring-gold-500/30 bg-ivory-200 hover:scale-105 transition-transform duration-300">
+                                        <img src="Code_Generated_Image.png" alt="P. Sinduja (Bride)" class="w-full h-full object-cover" style="object-position: center 10%;" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- Reception Date & Venue Details -->
+                            <div class="mt-6 pt-6 border-t border-gold-500/30 grid grid-cols-1 md:grid-cols-3 gap-3 items-center font-cinzel layer-3d-mid">
+                                <div class="text-center p-2.5 rounded-xl hover:bg-gold-500/10 transition-colors">
+                                    <i class="fa-regular fa-calendar-days text-gold-600 text-lg mb-1 block"></i>
+                                    <p class="text-[10px] uppercase text-slate-500 tracking-wider">Date / தேதி</p>
+                                    <p class="text-burgundy-900 font-bold text-sm md:text-base">Thu, Nov 19, 2026</p>
+                                    <p class="font-tamil text-[11px] text-slate-600">கார்திகை 4</p>
+                                </div>
+                                <div class="text-center border-y md:border-y-0 md:border-x border-gold-500/30 py-2.5 p-2 rounded-xl hover:bg-gold-500/10 transition-colors">
+                                    <i class="fa-solid fa-glass-cheers text-gold-600 text-lg mb-1 block"></i>
+                                    <p class="text-[10px] uppercase text-slate-500 tracking-wider">Timing / நேரம்</p>
+                                    <p class="text-burgundy-900 font-bold text-sm md:text-base">6:00 PM - 9:00 PM</p>
+                                    <p class="font-tamil text-[11px] text-slate-600">மாலை 6:00 - 9:00</p>
+                                </div>
+                                <div class="text-center p-2.5 rounded-xl hover:bg-gold-500/10 transition-colors">
+                                    <i class="fa-solid fa-building-columns text-gold-600 text-lg mb-1 block"></i>
+                                    <p class="text-[10px] uppercase text-slate-500 tracking-wider">Venue / இடம்</p>
+                                    <p class="text-burgundy-900 font-bold text-sm md:text-base">Sri Gowri Mahal</p>
+                                    <p class="font-tamil text-[11px] text-slate-600">பொள்ளாச்சி</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT COLUMN: BRIDE (GIRL) -->
+                    <div class="lg:col-span-3 order-3 lg:order-3 flex justify-center scroll-reveal">
+                        <div class="glass-card-3d tilt-card-3d p-3 rounded-3xl border-2 border-gold-500/50 relative gold-shimmer-sweep group w-full max-w-[280px] shadow-2xl">
+                            <div class="w-full h-[400px] sm:h-[440px] lg:h-[500px] rounded-2xl overflow-hidden relative shadow-inner bg-ivory-100 flex items-center justify-center p-1">
+                                <img src="Code_Generated_Image.png" alt="P. Sinduja - Bride" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" style="object-position: center 10%;" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-burgundy-950/80 via-transparent to-transparent pointer-events-none"></div>
+                                <div class="absolute bottom-3 left-0 right-0 text-center px-2 z-10">
+                                    <span class="font-playfair text-xl font-bold text-gold-300 block drop-shadow">P. Sinduja</span>
+                                    <span class="font-tamil text-xs text-gold-200 block">மணமகள் (Bride)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Call to Action Buttons -->
+                <div class="mt-8 flex flex-wrap items-center justify-center gap-4 font-cinzel scroll-reveal">
+                    <a href="#rsvp" class="bg-burgundy-900 hover:bg-burgundy-800 text-gold-300 font-semibold px-8 py-3.5 rounded-full border border-gold-500 shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-1 hover:scale-105 text-sm tracking-wider flex items-center gap-2">
+                        <span class="lang-en"><i class="fa-solid fa-envelope-open-text mr-1"></i>RSVP Attendance</span>
+                        <span class="lang-ta hidden font-tamil"><i class="fa-solid fa-envelope-open-text mr-1"></i>வருகையை உறுதிசெய்தல்</span>
+                    </a>
+                    <a href="#schedule" class="bg-white/90 hover:bg-white text-burgundy-900 font-semibold px-8 py-3.5 rounded-full border border-gold-600/40 shadow hover:shadow-xl transition-all transform hover:-translate-y-1 hover:scale-105 text-sm tracking-wider flex items-center gap-2">
+                        <span class="lang-en"><i class="fa-solid fa-list-check mr-1"></i>Evening Program</span>
+                        <span class="lang-ta hidden font-tamil"><i class="fa-solid fa-list-check mr-1"></i>நிகழ்ச்சி நிரல்</span>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- COUNTDOWN SECTION -->
+        <section class="py-12 bg-burgundy-950 text-gold-100 relative border-y-2 border-gold-500/50 overflow-hidden">
+            <div class="max-w-5xl mx-auto px-4 text-center relative z-10 scroll-reveal">
+                <h3 class="font-cinzel text-xs uppercase tracking-[0.4em] text-gold-400 mb-2">Countdown to the Grand Reception Evening</h3>
+                <h2 class="font-playfair text-2xl md:text-3xl font-semibold mb-8 text-white">
+                    <span class="lang-en">Join Us For An Unforgettable Celebration</span>
+                    <span class="lang-ta hidden font-tamil">இன்னும் சில தினங்களில் திருமண வரவேற்பு மாலை</span>
+                </h2>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-3xl mx-auto font-cinzel perspective-container">
+                    <div class="bg-burgundy-900/90 p-4 md:p-6 rounded-xl border border-gold-500/30 shadow-2xl transform hover:scale-105 transition-all tilt-card-3d">
+                        <span id="countDays" class="block font-playfair text-3xl md:text-5xl font-bold text-gold-400 drop-shadow-md layer-3d-front">00</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-300 mt-1 block layer-3d-mid">Days / நாட்கள்</span>
+                    </div>
+                    <div class="bg-burgundy-900/90 p-4 md:p-6 rounded-xl border border-gold-500/30 shadow-2xl transform hover:scale-105 transition-all tilt-card-3d">
+                        <span id="countHours" class="block font-playfair text-3xl md:text-5xl font-bold text-gold-400 drop-shadow-md layer-3d-front">00</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-300 mt-1 block layer-3d-mid">Hours / மணி</span>
+                    </div>
+                    <div class="bg-burgundy-900/90 p-4 md:p-6 rounded-xl border border-gold-500/30 shadow-2xl transform hover:scale-105 transition-all tilt-card-3d">
+                        <span id="countMinutes" class="block font-playfair text-3xl md:text-5xl font-bold text-gold-400 drop-shadow-md layer-3d-front">00</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-300 mt-1 block layer-3d-mid">Minutes / நிமிடம்</span>
+                    </div>
+                    <div class="bg-burgundy-900/90 p-4 md:p-6 rounded-xl border border-gold-500/30 shadow-2xl transform hover:scale-105 transition-all tilt-card-3d">
+                        <span id="countSeconds" class="block font-playfair text-3xl md:text-5xl font-bold text-gold-400 drop-shadow-md layer-3d-front">00</span>
+                        <span class="text-xs uppercase tracking-widest text-slate-300 mt-1 block layer-3d-mid">Seconds / விநாடி</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROGRAM HIGHLIGHTS SECTION -->
+        <section id="schedule" class="py-20 px-4 max-w-6xl mx-auto">
+            <div class="text-center mb-16 scroll-reveal">
+                <span class="font-script text-3xl text-gold-600 block">Evening Itinerary</span>
+                <h2 class="font-cinzel text-3xl md:text-4xl font-bold text-burgundy-950 mt-1">
+                    <span class="lang-en">Reception Highlights &amp; Flow</span>
+                    <span class="lang-ta hidden font-tamil">மாலை வரவேற்பு நிகழ்ச்சி நிரல்</span>
+                </h2>
+                <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mt-4"></div>
+            </div>
+
+            <!-- Reception Program Timeline Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 perspective-container">
+
+                <div class="glass-card-3d tilt-card-3d rounded-2xl p-6 border border-gold-500/30 shadow-lg hover:shadow-2xl transition-all relative flex flex-col justify-between scroll-reveal">
+                    <div class="layer-3d-mid">
+                        <div class="w-12 h-12 bg-burgundy-900 text-gold-300 rounded-xl flex items-center justify-center text-xl mb-4 font-bold shadow-lg layer-3d-high">
+                            <i class="fa-solid fa-wine-glass"></i>
+                        </div>
+                        <span class="bg-gold-500/20 text-gold-700 text-xs font-semibold px-2.5 py-1 rounded-md font-cinzel">6:00 PM - 6:30 PM</span>
+                        <h3 class="font-playfair text-xl font-bold text-burgundy-950 mt-3 layer-3d-front">Welcome &amp; Mocktails</h3>
+                        <p class="text-xs text-slate-600 mt-2">
+                            Guest arrival, red carpet welcome drinks &amp; photo backdrops.
+                        </p>
+                        <p class="font-tamil text-xs text-gold-700 mt-2">விருந்தினர்கள் நல்வரவு &amp; வரவேற்பு பானங்கள்</p>
+                    </div>
+                </div>
+
+                <div class="glass-card-3d tilt-card-3d rounded-2xl p-6 border border-gold-500/30 shadow-lg hover:shadow-2xl transition-all relative flex flex-col justify-between scroll-reveal">
+                    <div class="layer-3d-mid">
+                        <div class="w-12 h-12 bg-gold-500 text-burgundy-950 rounded-xl flex items-center justify-center text-xl mb-4 font-bold shadow-lg layer-3d-high">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <span class="bg-gold-500/20 text-gold-700 text-xs font-semibold px-2.5 py-1 rounded-md font-cinzel">6:30 PM - 7:00 PM</span>
+                        <h3 class="font-playfair text-xl font-bold text-burgundy-950 mt-3 layer-3d-front">Grand Entrance</h3>
+                        <p class="text-xs text-slate-600 mt-2">
+                            Grand stage entry of couple, photo session &amp; cake cutting ceremony.
+                        </p>
+                        <p class="font-tamil text-xs text-gold-700 mt-2">மணமக்களின் மேடை வருகை &amp; வாழ்த்துக்கள்</p>
+                    </div>
+                </div>
+
+                <div class="glass-card-3d tilt-card-3d rounded-2xl p-6 border border-gold-500/30 shadow-lg hover:shadow-2xl transition-all relative flex flex-col justify-between scroll-reveal">
+                    <div class="layer-3d-mid">
+                        <div class="w-12 h-12 bg-burgundy-900 text-gold-300 rounded-xl flex items-center justify-center text-xl mb-4 font-bold shadow-lg layer-3d-high">
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+                        <span class="bg-gold-500/20 text-gold-700 text-xs font-semibold px-2.5 py-1 rounded-md font-cinzel">7:00 PM Onwards</span>
+                        <h3 class="font-playfair text-xl font-bold text-burgundy-950 mt-3 layer-3d-front">A. R. Rahman Marriage Melodies</h3>
+                        <p class="text-xs text-slate-600 mt-2">
+                            Enchanting romantic hits featuring Kannalane, Anbil Avan, Snehidhane &amp; Mangalyam themes.
+                        </p>
+                        <p class="font-tamil text-xs text-gold-700 mt-2">ஏ.ஆர். ரஹ்மான் அவர்களின் இனிமையான திருமண பாடல்கள்</p>
+                    </div>
+                </div>
+
+                <div class="glass-card-3d tilt-card-3d rounded-2xl p-6 border border-gold-500/30 shadow-lg hover:shadow-2xl transition-all relative flex flex-col justify-between scroll-reveal">
+                    <div class="layer-3d-mid">
+                        <div class="w-12 h-12 bg-gold-500 text-burgundy-950 rounded-xl flex items-center justify-center text-xl mb-4 font-bold shadow-lg layer-3d-high">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <span class="bg-gold-500/20 text-gold-700 text-xs font-semibold px-2.5 py-1 rounded-md font-cinzel">7:00 PM - 9:00 PM</span>
+                        <h3 class="font-playfair text-xl font-bold text-burgundy-950 mt-3 layer-3d-front">Gala Reception Dinner</h3>
+                        <p class="text-xs text-slate-600 mt-2">
+                            Lavish multi-cuisine vegetarian &amp; non-vegetarian buffet feast.
+                        </p>
+                        <p class="font-tamil text-xs text-gold-700 mt-2">சுவையான இரவு உணவு உபசரிப்பு</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Calendar Export Section -->
+            <div class="mt-12 text-center bg-ivory-50 p-6 rounded-2xl border border-gold-500/30 max-w-2xl mx-auto shadow-md scroll-reveal">
+                <p class="font-cinzel text-xs uppercase tracking-widest text-burgundy-900 font-bold mb-3">Save Reception Date To Your Calendar</p>
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <button type="button" onclick="addToGoogleCalendar()" class="text-xs bg-gold-500/20 hover:bg-gold-500/30 text-burgundy-950 font-semibold px-5 py-2.5 rounded-lg transition-all flex items-center gap-2 border border-gold-500/30 hover:scale-105">
+                        <i class="fa-brands fa-google text-gold-700"></i> Add to Google Calendar
+                    </button>
+                    <button type="button" onclick="downloadICS()" class="text-xs bg-burgundy-900 text-gold-200 hover:bg-burgundy-800 font-semibold px-5 py-2.5 rounded-lg transition-all flex items-center gap-2 hover:scale-105">
+                        <i class="fa-regular fa-calendar-plus text-gold-400"></i> Download Apple/iCal Event
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- VENUE & SATELLITE MAP SECTION -->
+        <section id="venue" class="py-20 px-4 bg-ivory-200/50 border-t border-gold-500/20">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-12 scroll-reveal">
+                    <span class="font-script text-3xl text-gold-600 block">Location &amp; Directions</span>
+                    <h2 class="font-cinzel text-3xl md:text-4xl font-bold text-burgundy-950 mt-1">
+                        <span class="lang-en">Reception Venue</span>
+                        <span class="lang-ta hidden font-tamil">வரவேற்பு மண்டப முகவரி</span>
+                    </h2>
+                    <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mt-4"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch perspective-container">
+                    <!-- Venue Card -->
+                    <div class="lg:col-span-5 glass-card-3d tilt-card-3d rounded-2xl p-8 border border-gold-500/30 flex flex-col justify-between scroll-reveal">
+                        <div class="layer-3d-mid">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-12 h-12 bg-gold-500/20 text-gold-700 rounded-xl flex items-center justify-center text-2xl layer-3d-high shadow-md">
+                                    <i class="fa-solid fa-hotel"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-playfair text-2xl font-bold text-burgundy-950 layer-3d-front">Sri Gowri Mahal</h3>
+                                    <p class="font-tamil text-sm text-gold-700">ஸ்ரீ கெளரி மஹால்</p>
+                                    <div class="flex items-center gap-2 mt-1.5">
+                                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-0.5 rounded-full flex items-center gap-1 border border-amber-300 shadow-sm">
+                                            <i class="fa-solid fa-star text-amber-500 text-xs"></i> 4.7
+                                        </span>
+                                        <span class="text-xs text-slate-600 font-medium">(Google Maps Rating)</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-4 text-slate-700 text-sm">
+                                <div class="flex items-start gap-3">
+                                    <i class="fa-solid fa-location-dot text-gold-600 mt-1 text-base"></i>
+                                    <p>Anaimalai Road, Kunjipalayam Pirivu, Pollachi, Tamil Nadu 642001</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i class="fa-solid fa-square-parking text-gold-600 mt-1 text-base"></i>
+                                    <p>Valet Parking Available for all reception guests (வாகன நிறுத்துமிடம் உள்ளது)</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <i class="fa-solid fa-clock text-gold-600 mt-1 text-base"></i>
+                                    <p>Reception Hall Open from 6:00 PM onwards</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-6 border-t border-gold-500/20 layer-3d-high">
+                            <a href="https://maps.app.goo.gl/eU5NAZ4kkmY9ueaq6" target="_blank" rel="noopener noreferrer" class="w-full bg-burgundy-900 hover:bg-burgundy-800 text-gold-300 font-cinzel font-semibold py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md text-sm hover:scale-105">
+                                <i class="fa-solid fa-diamond-turn-right text-gold-400"></i>
+                                <span>Navigate via Google Maps</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Satellite Map Embed -->
+                    <div class="lg:col-span-7 glass-card-3d rounded-2xl overflow-hidden border border-gold-500/30 h-80 lg:h-auto min-h-[320px] relative shadow-lg scroll-reveal">
+                        <iframe 
+                            title="Reception Venue Satellite Map"
+                            class="w-full h-full border-0 transition-all duration-500" 
+                            src="https://maps.google.com/maps?q=Sri+Gowri+Mahal,+Anaimalai+Road,+Kunjipalayam+Pirivu,+Pollachi&t=k&z=17&ie=UTF8&iwloc=&output=embed" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP SECTION -->
+        <section id="rsvp" class="py-20 px-4 max-w-4xl mx-auto perspective-container">
+            <div class="text-center mb-12 scroll-reveal">
+                <span class="font-script text-3xl text-gold-600 block">Kindly Respond</span>
+                <h2 class="font-cinzel text-3xl md:text-4xl font-bold text-burgundy-950 mt-1">
+                    <span class="lang-en">Reception RSVP</span>
+                    <span class="lang-ta hidden font-tamil">வருகை உறுதிசெய்தல்</span>
+                </h2>
+                <p class="text-slate-600 text-sm mt-2 max-w-md mx-auto">Please confirm your attendance for the reception evening by November 10, 2026.</p>
+                <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-gold-500 to-transparent mx-auto mt-4"></div>
+            </div>
+
+            <!-- RSVP Form Card -->
+            <div class="glass-card-3d tilt-card-3d rounded-3xl p-6 sm:p-10 border-2 border-gold-500/40 shadow-2xl scroll-reveal">
+                <form id="rsvpForm" onsubmit="handleRSVPSubmit(event)" class="space-y-6 layer-3d-mid">
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="guestName" class="block font-cinzel text-xs uppercase tracking-wider text-burgundy-900 font-bold mb-2">
+                                Guest Name / பெயர் *
+                            </label>
+                            <input id="guestName" type="text" name="Guest Name" required placeholder="e.g. S. Ramanathan" class="w-full bg-white/90 border border-gold-500/40 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-500 text-slate-800 transition-all">
+                        </div>
+
+                        <div>
+                            <label for="guestPhone" class="block font-cinzel text-xs uppercase tracking-wider text-burgundy-900 font-bold mb-2">
+                                Phone or Email / தொடர்பு எண்
+                            </label>
+                            <input id="guestPhone" type="text" name="Phone or Email" placeholder="+91 98765 43210" class="w-full bg-white/90 border border-gold-500/40 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-500 text-slate-800 transition-all">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label for="rsvpStatus" class="block font-cinzel text-xs uppercase tracking-wider text-burgundy-900 font-bold mb-2">
+                                Reception Attendance / வருகை *
+                            </label>
+                            <select id="rsvpStatus" name="Reception Attendance" required class="w-full bg-white/90 border border-gold-500/40 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-500 text-slate-800 transition-all">
+                                <option value="Joyfully Attending Reception / நிச்சயம் வருகை தருவேன்">Joyfully Attending Reception / நிச்சயம் வருகை தருவேன்</option>
+                                <option value="Regretfully Decline / மன்னிக்கவும், வர இயலவில்லை">Regretfully Decline / மன்னிக்கவும், வர இயலவில்லை</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="guestCount" class="block font-cinzel text-xs uppercase tracking-wider text-burgundy-900 font-bold mb-2">
+                                Number of Guests / விருந்தினர்கள் *
+                            </label>
+                            <select id="guestCount" name="Number of Guests" required class="w-full bg-white/90 border border-gold-500/40 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-500 text-slate-800 transition-all">
+                                <option value="1 Person / 1 நபர்">1 Person / 1 நபர்</option>
+                                <option value="2 Persons / 2 நபர்கள்">2 Persons / 2 நபர்கள்</option>
+                                <option value="3 Persons / 3 நபர்கள்">3 Persons / 3 நபர்கள்</option>
+                                <option value="Family Attending / குடும்பத்துடன்">Family Attending / குடும்பத்துடன்</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="guestMsg" class="block font-cinzel text-xs uppercase tracking-wider text-burgundy-900 font-bold mb-2">
+                            Warm Wishes &amp; Blessings to the Couple / வாழ்த்துக்கள்
+                        </label>
+                        <textarea id="guestMsg" name="Message" rows="3" placeholder="Write your warm wishes for P. Amarnath & P. Sinduja..." class="w-full bg-white/90 border border-gold-500/40 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-500 text-slate-800 transition-all"></textarea>
+                    </div>
+
+                    <button id="rsvpSubmitBtn" type="submit" class="w-full bg-burgundy-900 hover:bg-burgundy-800 text-gold-300 font-cinzel font-bold py-4 rounded-xl shadow-xl hover:shadow-2xl transition-all tracking-widest uppercase text-sm border border-gold-500 hover:scale-[1.01] active:scale-[0.99] layer-3d-high">
+                        Confirm Reception RSVP / அனுப்பவும்
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-burgundy-950 text-gold-200 py-12 px-4 border-t-2 border-gold-500/50 text-center font-cinzel relative z-20">
+        <div class="max-w-4xl mx-auto space-y-4">
+            <h3 class="text-2xl font-bold tracking-widest text-gold-400">P. Amarnath &amp; P. Sinduja</h3>
+            <p class="text-xs uppercase tracking-widest text-slate-400">Grand Marriage Reception Invitation</p>
+            <p class="font-tamil text-sm text-gold-300">॥ சுபம் ॥</p>
+        </div>
+    </footer>
+
+    <!-- Floating Glassmorphism Music Control Badge -->
+    <div id="musicPlayerBadge" class="fixed bottom-6 right-6 z-40 bg-burgundy-950/90 border-2 border-gold-500/60 px-4 py-3 rounded-full shadow-2xl flex items-center gap-3 backdrop-blur-md transition-all duration-300 hover:scale-105">
+        <button id="audioToggleBtn" type="button" onclick="toggleAudio()" aria-label="Toggle Music Playback" class="w-10 h-10 bg-gold-500 text-burgundy-950 rounded-full flex items-center justify-center font-bold text-sm shadow-md hover:bg-gold-400 transition-all focus:outline-none">
+            <i id="audioIcon" class="fa-solid fa-music"></i>
+        </button>
+        <div class="flex flex-col">
+            <span class="font-cinzel text-xs font-bold text-gold-300 tracking-wider">A. R. Rahman Marriage Melodies</span>
+            <span class="text-[10px] text-slate-300 font-sans">Kannalane, Anbil Avan &amp; Mangalyam Hits</span>
+        </div>
+        <div id="eqVisualizer" class="flex items-center gap-1 h-5 ml-1">
+            <span class="eq-bar paused"></span>
+            <span class="eq-bar paused"></span>
+            <span class="eq-bar paused"></span>
+            <span class="eq-bar paused"></span>
+        </div>
+    </div>
+
+    <!-- Hidden Audio Element -->
+    <audio id="arRahmanAudio" loop preload="auto" src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-indian-flute-112191.mp3"></audio>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transform translate-y-32 opacity-0 transition-all duration-300 max-w-md w-11/12 bg-burgundy-900 text-gold-200 border border-gold-500 p-4 rounded-xl shadow-2xl flex items-center gap-3">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-gold-400 text-xl"></i>
+        <span id="toastMsg" class="text-xs font-sans font-medium">Action completed successfully.</span>
+    </div>
+
+    <script>
+        let isTamil = false;
+        let isPlayingAudio = false;
+        let envelopeOpened = false;
+
+        let scene3d, camera3d, renderer3d;
+        let ring1Mesh, ring2Mesh, floatingGems = [];
+        let mouseX = 0, mouseY = 0;
+
+        /* Envelope Open Handler */
+        function openInvitationEnvelope() {
+            if (envelopeOpened) return;
+            envelopeOpened = true;
+
+            const envelopeCard = document.getElementById('envelopeCard');
+            const envelopeModal = document.getElementById('envelopeModal');
+
+            if (envelopeCard) envelopeCard.classList.add('envelope-opened');
+
+            // Trigger Confetti Pop
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 150,
+                    spread: 100,
+                    origin: { y: 0.5 },
+                    colors: ['#d4af37', '#6b1124', '#fcd34d', '#ffffff', '#e6a15c']
+                });
+            }
+
+            // Play Music on Unboxing
+            const audio = document.getElementById('arRahmanAudio');
+            if (audio && !isPlayingAudio) {
+                audio.play().then(() => {
+                    startRahmanMusicUI();
+                    showToast('Welcome! Playing: A. R. Rahman Wedding Melodies', 'fa-music');
+                }).catch(() => {});
+            }
+
+            // Hide overlay modal after flap animation completes
+            setTimeout(() => {
+                if (envelopeModal) {
+                    envelopeModal.classList.add('opacity-0', 'pointer-events-none');
+                }
+            }, 1000);
+        }
+
+        function reopenEnvelope() {
+            envelopeOpened = false;
+            const envelopeCard = document.getElementById('envelopeCard');
+            const envelopeModal = document.getElementById('envelopeModal');
+
+            if (envelopeModal) {
+                envelopeModal.classList.remove('opacity-0', 'pointer-events-none');
+            }
+            if (envelopeCard) {
+                envelopeCard.classList.remove('envelope-opened');
+            }
+        }
+
+        /* WebGL Three.js Interactive 3D Background Engine */
+        function initThreeJSScene() {
+            const canvas3d = document.getElementById('threeCanvas');
+            if (!canvas3d || typeof THREE === 'undefined') return;
+
+            scene3d = new THREE.Scene();
+            camera3d = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera3d.position.z = 25;
+
+            renderer3d = new THREE.WebGLRenderer({ canvas: canvas3d, alpha: true, antialias: true });
+            renderer3d.setSize(window.innerWidth, window.innerHeight);
+            renderer3d.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            const ambientLight = new THREE.AmbientLight(0xfff5ea, 0.95);
+            scene3d.add(ambientLight);
+
+            const goldSpotLight = new THREE.SpotLight(0xd4af37, 2.5);
+            goldSpotLight.position.set(20, 30, 20);
+            scene3d.add(goldSpotLight);
+
+            const burgundyPointLight = new THREE.PointLight(0x8b1d31, 1.8, 50);
+            burgundyPointLight.position.set(-20, -10, 10);
+            scene3d.add(burgundyPointLight);
+
+            const goldMaterial = new THREE.MeshStandardMaterial({
+                color: 0xd4af37,
+                metalness: 0.88,
+                roughness: 0.16,
+                emissive: 0x221700
+            });
+
+            const ringGeo = new THREE.TorusGeometry(3.5, 0.4, 24, 100);
+            
+            ring1Mesh = new THREE.Mesh(ringGeo, goldMaterial);
+            ring1Mesh.position.set(-3, 6, -5);
+            ring1Mesh.rotation.x = Math.PI / 4;
+            scene3d.add(ring1Mesh);
+
+            ring2Mesh = new THREE.Mesh(ringGeo, goldMaterial);
+            ring2Mesh.position.set(-1.2, 5.2, -4);
+            ring2Mesh.rotation.y = Math.PI / 3;
+            scene3d.add(ring2Mesh);
+
+            const gemGeo = new THREE.OctahedronGeometry(0.9, 0);
+            for (let i = 0; i < 18; i++) {
+                const gem = new THREE.Mesh(gemGeo, goldMaterial);
+                gem.position.set(
+                    (Math.random() - 0.5) * 40,
+                    (Math.random() - 0.5) * 40,
+                    (Math.random() - 0.5) * 20 - 5
+                );
+                gem.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+                gem.scale.setScalar(Math.random() * 0.8 + 0.4);
+                scene3d.add(gem);
+                floatingGems.push({
+                    mesh: gem,
+                    rotSpeedX: (Math.random() - 0.5) * 0.02,
+                    rotSpeedY: (Math.random() - 0.5) * 0.02,
+                    floatSpeed: Math.random() * 0.01 + 0.005
+                });
+            }
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+                mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+            });
+
+            window.addEventListener('resize', () => {
+                if (!camera3d || !renderer3d) return;
+                camera3d.aspect = window.innerWidth / window.innerHeight;
+                camera3d.updateProjectionMatrix();
+                renderer3d.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            animateThreeJS();
+        }
+
+        function animateThreeJS() {
+            requestAnimationFrame(animateThreeJS);
+
+            if (ring1Mesh) {
+                ring1Mesh.rotation.x += 0.004;
+                ring1Mesh.rotation.y += 0.006;
+            }
+            if (ring2Mesh) {
+                ring2Mesh.rotation.x -= 0.005;
+                ring2Mesh.rotation.y += 0.003;
+            }
+
+            floatingGems.forEach(g => {
+                g.mesh.rotation.x += g.rotSpeedX;
+                g.mesh.rotation.y += g.rotSpeedY;
+                g.mesh.position.y += Math.sin(Date.now() * 0.001 + g.mesh.position.x) * g.floatSpeed;
+            });
+
+            if (camera3d) {
+                camera3d.position.x += (mouseX * 3 - camera3d.position.x) * 0.05;
+                camera3d.position.y += (-mouseY * 3 - camera3d.position.y) * 0.05;
+                camera3d.lookAt(scene3d.position);
+            }
+
+            if (renderer3d && scene3d && camera3d) {
+                renderer3d.render(scene3d, camera3d);
+            }
+        }
+
+        /* Delicate Lover Hearts & Golden Stardust Particle Engine */
+        function initParticleCanvas() {
+            const canvas = document.getElementById('particleCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const particles = [];
+            const particleCount = 70;
+
+            const heartColors = [
+                '#ff4d6d', '#ff758f', '#ff8fa3', '#c9184a', '#a4133c', '#d4af37', '#f59e0b'
+            ];
+
+            for (let i = 0; i < particleCount; i++) {
+                const isHeart = i % 2 === 0;
+                const isSparkle = i % 5 === 0;
+
+                particles.push({
+                    type: isHeart ? 'heart' : (isSparkle ? 'sparkle' : 'stardust'),
+                    x: Math.random() * width,
+                    y: Math.random() * height - height,
+                    size: isHeart ? Math.random() * 5 + 3 : (isSparkle ? Math.random() * 2.5 + 1.5 : Math.random() * 1.8 + 0.8),
+                    speedY: isHeart ? Math.random() * 1.1 + 0.5 : Math.random() * 0.9 + 0.3,
+                    swaySpeed: Math.random() * 0.025 + 0.01,
+                    swayOffset: Math.random() * Math.PI * 2,
+                    swayAmplitude: Math.random() * 2.0 + 0.5,
+                    color: isHeart ? heartColors[Math.floor(Math.random() * heartColors.length)] : '#fcd34d',
+                    opacity: Math.random() * 0.65 + 0.35,
+                    rotation: (Math.random() - 0.5) * 40,
+                    rotSpeed: (Math.random() - 0.5) * 1.2,
+                    flipSpeed: Math.random() * 0.03 + 0.01,
+                    flipAngle: Math.random() * Math.PI,
+                    pulse: Math.random() * Math.PI
+                });
+            }
+
+            function drawHeart(ctx, p) {
+                const flipScale = Math.cos(p.flipAngle);
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rotation * Math.PI) / 180);
+                ctx.scale(1, flipScale);
+                ctx.globalAlpha = p.opacity;
+
+                const topCurveHeight = p.size * 0.3;
+                ctx.beginPath();
+                ctx.moveTo(0, topCurveHeight);
+                ctx.bezierCurveTo(0, 0, -p.size, 0, -p.size, topCurveHeight);
+                ctx.bezierCurveTo(-p.size, (p.size + topCurveHeight) / 2, 0, p.size * 1.3, 0, p.size * 1.6);
+                ctx.bezierCurveTo(0, p.size * 1.3, p.size, (p.size + topCurveHeight) / 2, p.size, topCurveHeight);
+                ctx.bezierCurveTo(p.size, 0, 0, 0, 0, topCurveHeight);
+                ctx.closePath();
+
+                const grad = ctx.createRadialGradient(0, topCurveHeight, p.size * 0.2, 0, topCurveHeight, p.size * 1.2);
+                grad.addColorStop(0, p.color);
+                grad.addColorStop(1, '#590d22');
+                ctx.fillStyle = grad;
+                ctx.shadowBlur = 6;
+                ctx.shadowColor = p.color;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function drawSparkle(ctx, p) {
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.globalAlpha = p.opacity * (0.6 + 0.4 * Math.sin(p.pulse));
+                ctx.fillStyle = p.color;
+                ctx.shadowBlur = 6;
+                ctx.shadowColor = p.color;
+
+                ctx.beginPath();
+                for (let i = 0; i < 4; i++) {
+                    ctx.lineTo(Math.cos((i * Math.PI) / 2) * p.size * 1.8, Math.sin((i * Math.PI) / 2) * p.size * 1.8);
+                    ctx.lineTo(Math.cos((i * Math.PI) / 2 + Math.PI / 4) * p.size * 0.4, Math.sin((i * Math.PI) / 2 + Math.PI / 4) * p.size * 0.4);
+                }
+                ctx.closePath();
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function drawStardust(ctx, p) {
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.globalAlpha = p.opacity * (0.5 + 0.5 * Math.sin(p.pulse));
+                ctx.fillStyle = p.color;
+                ctx.shadowBlur = 5;
+                ctx.shadowColor = '#d4af37';
+
+                ctx.beginPath();
+                ctx.arc(0, 0, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            function renderParticles() {
+                ctx.clearRect(0, 0, width, height);
+
+                particles.forEach(p => {
+                    p.y += p.speedY;
+                    p.swayOffset += p.swaySpeed;
+                    p.x += Math.sin(p.swayOffset) * p.swayAmplitude;
+                    p.rotation += p.rotSpeed;
+                    p.flipAngle += p.flipSpeed;
+                    p.pulse += 0.04;
+
+                    if (p.y > height + 20) {
+                        p.y = -20;
+                        p.x = Math.random() * width;
+                    }
+
+                    if (p.type === 'heart') {
+                        drawHeart(ctx, p);
+                    } else if (p.type === 'sparkle') {
+                        drawSparkle(ctx, p);
+                    } else {
+                        drawStardust(ctx, p);
+                    }
+                });
+
+                requestAnimationFrame(renderParticles);
+            }
+
+            renderParticles();
+        }
+
+        /* Audio Controls */
+        function toggleAudio() {
+            const audio = document.getElementById('arRahmanAudio');
+            if (!audio) return;
+
+            if (isPlayingAudio) {
+                audio.pause();
+                stopRahmanMusicUI();
+                showToast('Music paused.', 'fa-circle-pause');
+            } else {
+                audio.play().then(() => {
+                    startRahmanMusicUI();
+                    showToast('Now Playing: A. R. Rahman Wedding Melodies', 'fa-music');
+                }).catch(() => {
+                    showToast('Click anywhere on page to play music', 'fa-volume-low');
+                });
+            }
+        }
+
+        function startRahmanMusicUI() {
+            isPlayingAudio = true;
+            const btn = document.getElementById('audioToggleBtn');
+            const icon = document.getElementById('audioIcon');
+            const eqBars = document.querySelectorAll('.eq-bar');
+
+            if (btn) btn.classList.add('bg-gold-400', 'animate-pulse');
+            if (icon) icon.className = 'fa-solid fa-pause';
+            eqBars.forEach(bar => bar.classList.remove('paused'));
+        }
+
+        function stopRahmanMusicUI() {
+            isPlayingAudio = false;
+            const btn = document.getElementById('audioToggleBtn');
+            const icon = document.getElementById('audioIcon');
+            const eqBars = document.querySelectorAll('.eq-bar');
+
+            if (btn) btn.classList.remove('bg-gold-400', 'animate-pulse');
+            if (icon) icon.className = 'fa-solid fa-music';
+            eqBars.forEach(bar => bar.classList.add('paused'));
+        }
+
+        /* Interactive Utilities */
+        function toggleLanguage() {
+            isTamil = !isTamil;
+            const langEn = document.querySelectorAll('.lang-en');
+            const langTa = document.querySelectorAll('.lang-ta');
+            const langLabel = document.getElementById('langLabel');
+
+            if (isTamil) {
+                langEn.forEach(el => el.classList.add('hidden'));
+                langTa.forEach(el => el.classList.remove('hidden'));
+                if (langLabel) langLabel.textContent = 'EN / தமிழ்';
+            } else {
+                langEn.forEach(el => el.classList.remove('hidden'));
+                langTa.forEach(el => el.classList.add('hidden'));
+                if (langLabel) langLabel.textContent = 'தமிழ் / EN';
+            }
+        }
+
+        function updateCountdown() {
+            const eventDate = new Date('2026-11-19T18:00:00').getTime();
+            const now = new Date().getTime();
+            const difference = eventDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('countDays').innerText = String(days).padStart(2, '0');
+                document.getElementById('countHours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('countMinutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('countSeconds').innerText = String(seconds).padStart(2, '0');
+            } else {
+                document.getElementById('countDays').innerText = '00';
+                document.getElementById('countHours').innerText = '00';
+                document.getElementById('countMinutes').innerText = '00';
+                document.getElementById('countSeconds').innerText = '00';
+            }
+        }
+
+        function handleRSVPSubmit(e) {
+            e.preventDefault();
+            const btn = document.getElementById('rsvpSubmitBtn');
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner animate-spin"></i> Submitting...';
+            }
+
+            setTimeout(() => {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = 'Confirm Reception RSVP / அனுப்பவும்';
+                }
+
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 120,
+                        spread: 80,
+                        origin: { y: 0.6 },
+                        colors: ['#d4af37', '#6b1124', '#fcd34d', '#ffffff']
+                    });
+                }
+
+                showToast('Thank you! Your RSVP has been confirmed.', 'fa-circle-check');
+                document.getElementById('rsvpForm').reset();
+            }, 1200);
+        }
+
+        function addToGoogleCalendar() {
+            const title = "P. Amarnath & P. Sinduja Marriage Reception";
+            const start = "20261119T180000";
+            const end = "20261119T210000";
+            const details = "Grand Marriage Reception Evening featuring A. R. Rahman Marriage Melodies";
+            const location = "Sri Gowri Mahal, Anaimalai Road, Kunjipalayam Pirivu, Pollachi";
+
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${start}/${end}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
+            window.open(url, '_blank');
+        }
+
+        function downloadICS() {
+            const title = "P. Amarnath & P. Sinduja Reception Evening";
+            const location = "Sri Gowri Mahal, Anaimalai Road, Kunjipalayam Pirivu, Pollachi";
+            const start = "20261119T180000";
+            const end = "20261119T210000";
+
+            const icsData = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//Marriage Reception Invitation//EN',
+                'BEGIN:VEVENT',
+                `SUMMARY:${title}`,
+                'DESCRIPTION:Grand Marriage Reception Evening featuring A. R. Rahman Marriage Melodies',
+                `LOCATION:${location}`,
+                `DTSTART:${start}`,
+                `DTEND:${end}`,
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
+
+            const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'Reception_Invitation.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        function showToast(message, iconClass = 'fa-circle-check') {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            const toastIcon = document.getElementById('toastIcon');
+
+            if (toast && toastMsg && toastIcon) {
+                toastMsg.textContent = message;
+                toastIcon.className = `fa-solid ${iconClass} text-gold-400 text-xl`;
+                toast.classList.remove('translate-y-32', 'opacity-0');
+                toast.classList.add('translate-y-0', 'opacity-100');
+
+                setTimeout(() => {
+                    toast.classList.remove('translate-y-0', 'opacity-100');
+                    toast.classList.add('translate-y-32', 'opacity-0');
+                }, 4000);
+            }
+        }
+
+        function init3DTiltAndScroll() {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            reveals.forEach(el => observer.observe(el));
+
+            const tiltCards = document.querySelectorAll('.tilt-card-3d');
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    const rotX = (-y / rect.height) * 12;
+                    const rotY = (x / rect.width) * 12;
+                    card.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                });
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initThreeJSScene();
+            initParticleCanvas();
+            init3DTiltAndScroll();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+</body>
+</html>
